@@ -1,4 +1,6 @@
-"use client";
+'use client';
+
+import type { LinkOpenMode } from '@/lib/site';
 
 type LinkItem = {
   id: string;
@@ -11,6 +13,7 @@ type LinkListProps = {
   categoryLabel: string;
   items: LinkItem[];
   selectedLinkId: string | null;
+  openLinksIn: LinkOpenMode;
   onFocusLink: (url: string) => void;
   onSelectLink: (id: string, url: string) => void;
 };
@@ -19,9 +22,12 @@ export default function LinkList({
   categoryLabel,
   items,
   selectedLinkId,
+  openLinksIn,
   onFocusLink,
   onSelectLink,
 }: LinkListProps) {
+  const opensInNewTab = openLinksIn === 'new-tab';
+
   return (
     <div className="link-list-wrap">
       <h2>{categoryLabel}</h2>
@@ -32,8 +38,8 @@ export default function LinkList({
             <li key={item.id}>
               <a
                 href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={opensInNewTab ? '_blank' : undefined}
+                rel={opensInNewTab ? 'noopener noreferrer' : undefined}
                 className="link-item"
                 data-selected={isSelected}
                 onMouseEnter={() => {

@@ -20,25 +20,58 @@ npm run build
 
 ## Customize your installation
 
-Branding is centralized in **one file**: `lib/site.ts`.
+Branding + global link behavior are centralized in **one file**: `lib/site.ts`.
 
 Update this file to control:
 
 - `title`
 - `description`
 - `faviconEmoji`
+- `openLinksIn` (`"new-tab" | "same-tab"`)
+- `menubarLinks` (`{ label, href }[]`)
 
-Default branding values:
+Default config values:
 
 ```ts
 export const siteConfig = {
   title: 'Juxton.Link Navigator',
   description: 'juxton.link is a retro-first, open-source curated link navigator.',
   faviconEmoji: '🔗',
+  openLinksIn: 'new-tab',
+  menubarLinks: [
+    { label: 'File', href: '#' },
+    { label: 'Edit', href: '#' },
+    { label: 'View', href: '#' },
+    { label: 'Go', href: '#' },
+    { label: 'Bookmarks', href: '#' },
+    { label: 'Help', href: '#' },
+  ],
 } as const;
 ```
 
-This one config file drives the window title, page metadata, and share metadata. Do not treat branding as a component- or layout-level change; use `lib/site.ts` as the single branding entry point.
+### Global link behavior
+
+`openLinksIn` applies to both:
+
+- main content links in the right pane
+- menubar links in the top chrome
+
+Use `"new-tab"` to keep the current default behavior, or `"same-tab"` to open links in the current tab.
+
+### Example configuration
+
+```ts
+export const siteConfig = {
+  title: 'Avery Link Navigator',
+  description: 'A compact bookmark hub for personal and team resources.',
+  faviconEmoji: '🧭',
+  openLinksIn: 'same-tab',
+  menubarLinks: [
+    { label: 'Personal Site', href: 'https://juxton.com' },
+    { label: 'Repo', href: 'https://github.com/juxton/juxton.link' },
+  ],
+} as const;
+```
 
 ## Content authoring workflow
 

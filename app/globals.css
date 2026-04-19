@@ -209,6 +209,10 @@ body {
 
 .menu-button {
   min-width: 3.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .toolbar-button {

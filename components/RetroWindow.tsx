@@ -1,12 +1,14 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-import ThemeSelector from "@/components/ThemeSelector";
+import ThemeSelector from '@/components/ThemeSelector';
+import type { LinkOpenMode, SiteLink } from '@/lib/site';
 
 type RetroWindowProps = {
   title: string;
-  menuItems: string[];
+  menuItems: readonly SiteLink[];
+  openLinksIn: LinkOpenMode;
   toolbarItems: string[];
-  onToolbarAction: (action: "back" | "forward" | "up" | "reload" | "home") => void;
+  onToolbarAction: (action: 'back' | 'forward' | 'up' | 'reload' | 'home') => void;
   toolbarState: { canBack: boolean; canForward: boolean; canUp: boolean };
   statusText: string;
   leftPane: ReactNode;
@@ -16,6 +18,7 @@ type RetroWindowProps = {
 export default function RetroWindow({
   title,
   menuItems,
+  openLinksIn,
   toolbarItems,
   onToolbarAction,
   toolbarState,
@@ -23,20 +26,22 @@ export default function RetroWindow({
   leftPane,
   rightPane,
 }: RetroWindowProps) {
-  const toolbarActions: Record<string, "back" | "forward" | "up" | "reload" | "home"> = {
-    Back: "back",
-    Forward: "forward",
-    Up: "up",
-    Reload: "reload",
-    Home: "home",
+  const toolbarActions: Record<string, 'back' | 'forward' | 'up' | 'reload' | 'home'> = {
+    Back: 'back',
+    Forward: 'forward',
+    Up: 'up',
+    Reload: 'reload',
+    Home: 'home',
   };
 
-  const isEnabled = (action: "back" | "forward" | "up" | "reload" | "home") => {
-    if (action === "back") return toolbarState.canBack;
-    if (action === "forward") return toolbarState.canForward;
-    if (action === "up") return toolbarState.canUp;
+  const isEnabled = (action: 'back' | 'forward' | 'up' | 'reload' | 'home') => {
+    if (action === 'back') return toolbarState.canBack;
+    if (action === 'forward') return toolbarState.canForward;
+    if (action === 'up') return toolbarState.canUp;
     return true;
   };
+
+  const opensInNewTab = openLinksIn === 'new-tab';
 
   return (
     <main className="retro-shell">
@@ -58,9 +63,15 @@ export default function RetroWindow({
 
         <nav className="window-menubar" aria-label="Window menu">
           {menuItems.map((item) => (
-            <button key={item} type="button" className="chrome-button menu-button">
-              {item}
-            </button>
+            <a
+              key={item.label}
+              href={item.href}
+              target={opensInNewTab ? '_blank' : undefined}
+              rel={opensInNewTab ? 'noopener noreferrer' : undefined}
+              className="chrome-button menu-button"
+            >
+              {item.label}
+            </a>
           ))}
         </nav>
 
