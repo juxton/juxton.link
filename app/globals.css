@@ -145,6 +145,20 @@ body {
   border-bottom-color: var(--border-light);
 }
 
+.chrome-button:disabled,
+.toolbar-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.chrome-button:disabled:active,
+.toolbar-button:disabled:active {
+  border-left-color: var(--border-light);
+  border-top-color: var(--border-light);
+  border-right-color: var(--border-mid);
+  border-bottom-color: var(--border-mid);
+}
+
 .menu-button {
   min-width: 3.2rem;
 }
