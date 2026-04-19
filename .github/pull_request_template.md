@@ -3,26 +3,14 @@
 - What changed?
 - Why is this change needed?
 
-## Type of change
+## Content-only PRs
 
-- [ ] Markdown content update (`data/categories/*.md`)
-- [ ] Parsing/validation logic (`lib/`)
-- [ ] Documentation update
-- [ ] CI/workflow update
+- [ ] category file + slug match confirmed
+- [ ] URL format valid (`http/https`)
+- [ ] no duplicate URLs
+- [ ] summary/tags quality checked
 
-## Content checklist (if applicable)
+## Code/parser/theme PRs
 
-- [ ] Category frontmatter includes required fields (`title`, `slug`)
-- [ ] `slug` matches filename
-- [ ] Link lines follow grammar: `- [Title](https://...) — Summary #tags`
-- [ ] URLs are valid `http`/`https`
-- [ ] No duplicate URLs across categories
-
-## Validation
-
-- [ ] `npm run lint`
-- [ ] `npm run build`
-
-## Reviewer notes
-
-Anything maintainers should pay special attention to?
+- [ ] `npm run lint` run
+- [ ] `npm run build` run
