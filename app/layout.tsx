@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+
+import ThemeSelector from "@/components/ThemeSelector";
+import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -6,14 +11,35 @@ export const metadata: Metadata = {
   description: "juxton.link",
 };
 
+const themeBootstrapScript = `(function(){
+  var key=${JSON.stringify(THEME_STORAGE_KEY)};
+  var fallback=${JSON.stringify(DEFAULT_THEME)};
+  var valid={ retro: true, modern: true };
+  try {
+    var stored=window.localStorage.getItem(key);
+    var nextTheme=valid[stored] ? stored : fallback;
+    document.documentElement.dataset.theme=nextTheme;
+  } catch (error) {
+    document.documentElement.dataset.theme=fallback;
+  }
+})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" data-theme={DEFAULT_THEME} suppressHydrationWarning>
+      <body>
+        <Script
+          id="theme-bootstrap"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeBootstrapScript }}
+        />
+        <ThemeSelector />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+:root,
+html[data-theme="retro"] {
+  --color-bg: #f4ecd8;
+  --color-fg: #1e1a16;
+  --color-surface: #fdf8eb;
+  --color-border: #7f5f3d;
+  --color-accent: #a34212;
+  --color-accent-contrast: #fff7ed;
+}
+
+html[data-theme="modern"] {
+  --color-bg: #0f172a;
+  --color-fg: #e2e8f0;
+  --color-surface: #111827;
+  --color-border: #334155;
+  --color-accent: #38bdf8;
+  --color-accent-contrast: #06202e;
+}
+
 html,
 body {
   min-height: 100%;
@@ -7,4 +26,42 @@ body {
 
 body {
   margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.theme-selector {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background-color: var(--color-surface);
+}
+
+.theme-option {
+  appearance: none;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  background-color: transparent;
+  color: var(--color-fg);
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.theme-option[data-selected="true"] {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.theme-option:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
