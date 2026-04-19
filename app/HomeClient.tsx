@@ -6,6 +6,7 @@ import FolderTree, { type TreeNode } from '@/components/FolderTree';
 import LinkList, { type LinkItem } from '@/components/LinkList';
 import RetroWindow from '@/components/RetroWindow';
 import type { LinkCategory } from '@/lib/links';
+import { siteConfig } from '@/lib/site';
 
 type HomeClientProps = {
   categories: LinkCategory[];
@@ -155,7 +156,7 @@ export default function HomeClient({ categories }: HomeClientProps) {
 
   return (
     <RetroWindow
-      title='Juxton.Link Navigator'
+      title={siteConfig.title}
       menuItems={menuItems}
       toolbarItems={toolbarItems}
       onToolbarAction={handleToolbarAction}
