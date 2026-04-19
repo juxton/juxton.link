@@ -15,7 +15,6 @@ type HomeClientProps = {
 type Location = { categoryId: string; linkId: string | null };
 type ToolbarAction = 'back' | 'forward' | 'up' | 'reload' | 'home';
 
-const menuItems = ['File', 'Edit', 'View', 'Go', 'Bookmarks', 'Help'];
 const toolbarItems = ['Back', 'Forward', 'Up', 'Reload', 'Home'];
 
 function toLinkItem(categorySlug: string, index: number, link: LinkCategory['links'][number]): LinkItem {
@@ -157,7 +156,8 @@ export default function HomeClient({ categories }: HomeClientProps) {
   return (
     <RetroWindow
       title={siteConfig.title}
-      menuItems={menuItems}
+      menuItems={siteConfig.menubarLinks}
+      openLinksIn={siteConfig.openLinksIn}
       toolbarItems={toolbarItems}
       onToolbarAction={handleToolbarAction}
       toolbarState={{
@@ -189,6 +189,7 @@ export default function HomeClient({ categories }: HomeClientProps) {
           onFocusLink={(url) => {
             setStatusText(url);
           }}
+          openLinksIn={siteConfig.openLinksIn}
           onSelectLink={(id, _url) => {
             void _url;
             commitNavigation({ categoryId: selectedCategoryId, linkId: id }, 'link-list');
