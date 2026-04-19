@@ -76,7 +76,8 @@ body {
   background: var(--panel-bg);
   display: grid;
   grid-template-rows: auto auto auto 1fr auto;
-  min-height: min(700px, 90dvh);
+  height: min(700px, 90dvh);
+  min-height: 0;
 }
 
 .window-titlebar {
@@ -94,6 +95,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
   cursor: default;
   user-select: none;
   -webkit-user-select: none;
@@ -137,6 +139,11 @@ body {
   font-weight: 600;
   text-transform: capitalize;
   letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
 }
 
 .window-menubar,
@@ -214,7 +221,7 @@ body {
   grid-template-columns: minmax(220px, 28%) 1fr;
   gap: var(--panel-gap);
   padding: var(--panel-gap);
-  min-height: var(--pane-min-height);
+  min-height: 0;
 }
 
 .pane {
@@ -225,6 +232,7 @@ body {
   border-bottom-color: var(--border-light);
   background: var(--panel-inset-bg);
   padding: 0.45rem;
+  min-height: 0;
   overflow: auto;
 }
 
@@ -322,6 +330,7 @@ body {
 
 .theme-selector {
   display: inline-flex;
+  flex: 0 0 auto;
   gap: 0.25rem;
   padding: 0;
   border: 0;
@@ -353,6 +362,23 @@ a:focus-visible {
 }
 
 @media (max-width: 840px) {
+  .retro-window {
+    height: calc(100dvh - 2rem);
+  }
+
+  .window-menubar,
+  .window-toolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .window-menubar .chrome-button,
+  .window-toolbar .chrome-button {
+    flex: 0 0 auto;
+  }
+
   .window-main {
     grid-template-columns: 1fr;
   }
