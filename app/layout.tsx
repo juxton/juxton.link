@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 
+import { siteConfig } from "@/lib/site";
 import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Juxton.Link Navigator",
-  description: "juxton.link",
+  title: siteConfig.title,
+  description: siteConfig.description,
 };
 
 const themeBootstrapScript = `(function(){
