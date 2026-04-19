@@ -90,7 +90,40 @@ body {
   border-bottom: 1px solid var(--border-strong);
 }
 
-.titlebar-leading {
+.titlebar-leading-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  caret-color: transparent;
+}
+
+.titlebar-leading-button {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  caret-color: transparent;
+  line-height: 0;
+}
+
+.titlebar-leading-button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.titlebar-leading-icon {
   width: 0.7rem;
   height: 0.7rem;
   border: 1px solid var(--border-light);
