@@ -42,7 +42,16 @@ export default function RetroWindow({
     <main className="retro-shell">
       <section className="retro-window" aria-label="Juxton browser window">
         <header className="window-titlebar">
-          <div className="titlebar-leading" aria-hidden="true" />
+          <div className="titlebar-leading-wrap">
+            <button
+              type="button"
+              className="titlebar-leading-button"
+              aria-label="Window menu"
+              title="Window menu"
+            >
+              <span className="titlebar-leading-icon" aria-hidden="true" />
+            </button>
+          </div>
           <h1>{title}</h1>
           <ThemeSelector />
         </header>
