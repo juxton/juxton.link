@@ -28,8 +28,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Run link-only validation
+        run: |
+          set -euo pipefail
 
-      - name: Build (includes markdown parsing)
-        run: npm run build
+          if npm run | grep -qE '^\s{2}validate:link-data$'; then
+            npm run validate:link-data
+          elif npm run | grep -qE '^\s{2}validate:links$'; then
+            npm run validate:links
+          else
+            echo "No dedicated link validation script found (validate:link-data or validate:links)."
+            exit 1
+          fi
