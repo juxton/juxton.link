@@ -8,7 +8,16 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: siteConfig.title,
+  applicationName: siteConfig.title,
   description: siteConfig.description,
+  openGraph: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  twitter: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
 };
 
 const themeBootstrapScript = `(function(){
