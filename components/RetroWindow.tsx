@@ -64,17 +64,28 @@ export default function RetroWindow({
         </header>
 
         <nav className="window-menubar" aria-label="Window menu">
-          {menuItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              target={opensInNewTab ? '_blank' : undefined}
-              rel={opensInNewTab ? 'noopener noreferrer' : undefined}
-              className="chrome-button menu-button"
-            >
-              {item.label}
-            </a>
-          ))}
+          {menuItems.map((item) => {
+            const normalizedHref = item.href.trim();
+            const isPlaceholderHref = normalizedHref === '' || normalizedHref === '#';
+            const shouldOpenInNewTab = opensInNewTab && !isPlaceholderHref;
+
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                target={shouldOpenInNewTab ? '_blank' : undefined}
+                rel={shouldOpenInNewTab ? 'noopener noreferrer' : undefined}
+                onClick={(event) => {
+                  if (isPlaceholderHref) {
+                    event.preventDefault();
+                  }
+                }}
+                className="chrome-button menu-button"
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="window-toolbar" role="toolbar" aria-label="Navigation toolbar">
