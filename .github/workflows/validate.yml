@@ -1,0 +1,49 @@
+name: Validate
+
+on:
+  pull_request:
+
+jobs:
+  validate:
+    name: Lint, Build, and Link Data Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          set -euo pipefail
+          npm ci
+
+      - name: Run lint
+        run: |
+          set -euo pipefail
+          npm run lint
+
+      - name: Run build
+        run: |
+          set -euo pipefail
+          npm run build
+
+      - name: Run link-data validation script (if separate from build)
+        run: |
+          set -euo pipefail
+
+          if npm run | grep -qE '^\s{2}validate:link-data$'; then
+            echo "Found script: validate:link-data"
+            npm run validate:link-data
+          elif npm run | grep -qE '^\s{2}validate:links$'; then
+            echo "Found script: validate:links"
+            npm run validate:links
+          else
+            echo "No dedicated link-data validation script found."
+            echo "Assuming link-data checks are already covered by npm run build."
+          fi
