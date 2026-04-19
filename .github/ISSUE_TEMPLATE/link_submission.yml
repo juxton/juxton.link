@@ -1,0 +1,64 @@
+name: Link submission
+description: Suggest a new link for inclusion in the directory.
+title: "[Link Submission]: "
+labels:
+  - submission
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing a link! Please complete all required fields below.
+
+  - type: input
+    id: category_slug
+    attributes:
+      label: Proposed category slug
+      description: The category slug where this link best fits (for example, `developer-tools`).
+      placeholder: developer-tools
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: Link title
+      description: The display title for this link.
+      placeholder: Awesome Resource Name
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: Canonical URL for the resource.
+      placeholder: https://example.com
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: A concise summary of what this resource offers.
+      placeholder: One to three sentences describing the resource.
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated tags to improve discovery.
+      placeholder: open-source, tutorials, nextjs
+    validations:
+      required: true
+
+  - type: textarea
+    id: usefulness
+    attributes:
+      label: Why is this useful?
+      description: Explain why this link belongs in the directory and who benefits from it.
+      placeholder: This helps developers because...
+    validations:
+      required: true
