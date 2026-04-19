@@ -113,8 +113,8 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 0.9rem;
-  height: 0.9rem;
+  width: 1rem;
+  height: 1rem;
   margin: 0;
   padding: 0;
   border: 0;
@@ -123,7 +123,7 @@ body {
   user-select: none;
   -webkit-user-select: none;
   caret-color: transparent;
-  line-height: 0;
+  line-height: 1;
 }
 
 .titlebar-leading-button:focus-visible {
@@ -132,11 +132,13 @@ body {
 }
 
 .titlebar-leading-icon {
-  width: 0.7rem;
-  height: 0.7rem;
-  border: 1px solid var(--border-light);
-  background: color-mix(in srgb, var(--panel-bg) 60%, var(--accent-bg));
-  box-shadow: inset -1px -1px 0 var(--border-mid), inset 1px 1px 0 var(--border-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.85rem;
+  height: 0.85rem;
+  font-size: 0.72rem;
+  line-height: 1;
 }
 
 .window-titlebar h1 {
