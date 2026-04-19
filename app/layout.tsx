@@ -6,7 +6,7 @@ import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "juxton.link",
+  title: "Juxton.Link Navigator",
   description: "juxton.link",
 };
 
