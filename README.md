@@ -221,3 +221,7 @@ When reviewing link submissions:
 3. Confirm no URL duplication and valid `http/https` schemes.
 4. Ensure ordering and tags are consistent with nearby content.
 5. Ask for smaller follow-up PRs when unrelated links are mixed together.
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
