@@ -66,7 +66,7 @@ export default function HomeClient({ categories }: HomeClientProps) {
 
   return (
     <RetroWindow
-      title='juxton.link navigator'
+      title='Juxton.link Navigator'
       menuItems={menuItems}
       toolbarItems={toolbarItems}
       statusText={statusText}

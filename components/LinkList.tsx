@@ -32,6 +32,8 @@ export default function LinkList({
             <li key={item.id}>
               <a
                 href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="link-item"
                 data-selected={isSelected}
                 onMouseEnter={() => {
