@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 
-import ThemeSelector from "@/components/ThemeSelector";
 import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
 
 import "./globals.css";
@@ -37,7 +36,6 @@ export default function RootLayout({
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: themeBootstrapScript }}
         />
-        <ThemeSelector />
         {children}
       </body>
     </html>
