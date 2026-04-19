@@ -12,6 +12,7 @@ type Category = {
   slug: string;
   description?: string;
   order: number;
+  visibility?: string;
   tags: string[];
 };
 
@@ -117,6 +118,7 @@ function parseCategoryFile(file: string, source: string): LinkCategory {
     slug,
     description: asOptionalString(data.description),
     order: asNumber(data.order),
+    visibility: asOptionalString(data.visibility),
     tags: asStringList(data.tags),
   };
 

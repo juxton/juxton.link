@@ -39,13 +39,18 @@ Every category file starts with YAML-like frontmatter:
 
 ```md
 ---
-title: Web Platform
-slug: web-platform
-description: Core browser platform APIs, standards, and references.
-order: 10
+title: 3D Assets
+slug: 3d-assets
+description: Open-source avatars, props, environments, and structures for metaverse and web3 development workflows.
+order: 30
+visibility: public
 tags:
-  - frontend
-  - standards
+  - 3d
+  - metaverse
+  - web3
+  - gltf
+  - glb
+  - vrm
 ---
 ```
 
@@ -58,6 +63,7 @@ Optional:
 
 - `description`
 - `order` (number used for stable category sorting; lower appears first)
+- `visibility` (for curation visibility, e.g. `public`)
 - `tags` (category-level list)
 
 ### Link line grammar (strict and deterministic)
@@ -90,17 +96,22 @@ Example category file:
 
 ```md
 ---
-title: Design Systems
-slug: design-systems
-description: Practical system design and UI consistency resources.
-order: 20
+title: 3D Assets
+slug: 3d-assets
+description: Open-source avatars, props, environments, and structures for metaverse and web3 development workflows.
+order: 30
+visibility: public
 tags:
-  - ui
-  - ux
+  - 3d
+  - metaverse
+  - web3
+  - gltf
+  - glb
+  - vrm
 ---
 
-- [Material Design](https://m3.material.io/) — Design guidance and component patterns #components #guidelines | level:beginner | status:active
-- [A11Y Project](https://www.a11yproject.com/) — Accessibility checklists and inclusive design patterns #accessibility #checklists | level:intermediate | status:active
+- [Open Source 3D Assets](https://www.opensource3dassets.com/) — A curated collection of high-quality 3D assets for metaverse builders. #assets #glb #gltf #metaverse | status:active
+- [Open Source Avatars](https://www.opensourceavatars.com/) — A curated collection of high-quality 3D avatars for VR and gaming projects. #avatars #vrm #gltf #metaverse | status:active
 ```
 
 ## Parser and normalization flow
@@ -111,7 +122,7 @@ All markdown access is centralized in `lib/links.ts`:
 2. Parse frontmatter (`title`, `slug`, etc.).
 3. Parse link bullet lines with a deterministic parser in `lib/markdownLinks.ts`.
 4. Normalize to typed objects:
-   - `category: { title, slug, description, order, tags }`
+   - `category: { title, slug, description, order, visibility?, tags }`
    - `links: [{ title, url, summary, tags, level?, status?, metadata? }]`
 5. Apply stable sort:
    - categories by `order` then `title`
@@ -134,8 +145,8 @@ Current validation enforces:
 Invalid slug mismatch:
 
 ```md
-# file: data/categories/web-platform.md
-slug: browser-platform # ❌ does not match filename slug web-platform
+# file: data/categories/3d-assets.md
+slug: avatars # ❌ does not match filename slug 3d-assets
 ```
 
 Invalid link format:
@@ -160,7 +171,7 @@ Duplicate URL across categories:
 2. Add frontmatter with required fields:
    - `title`
    - `slug` (must match filename)
-3. Optionally add `description`, `order`, `tags`.
+3. Optionally add `description`, `order`, `visibility`, `tags`.
 4. Add at least one valid bullet link.
 5. Run validation checks locally (`npm run lint` and `npm run build`).
 6. Start dev server and preview (`npm run dev`).
