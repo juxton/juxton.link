@@ -6,6 +6,8 @@ type RetroWindowProps = {
   title: string;
   menuItems: string[];
   toolbarItems: string[];
+  onToolbarAction: (action: "back" | "forward" | "up" | "reload" | "home") => void;
+  toolbarState: { canBack: boolean; canForward: boolean; canUp: boolean };
   statusText: string;
   leftPane: ReactNode;
   rightPane: ReactNode;
@@ -15,10 +17,27 @@ export default function RetroWindow({
   title,
   menuItems,
   toolbarItems,
+  onToolbarAction,
+  toolbarState,
   statusText,
   leftPane,
   rightPane,
 }: RetroWindowProps) {
+  const toolbarActions: Record<string, "back" | "forward" | "up" | "reload" | "home"> = {
+    Back: "back",
+    Forward: "forward",
+    Up: "up",
+    Reload: "reload",
+    Home: "home",
+  };
+
+  const isEnabled = (action: "back" | "forward" | "up" | "reload" | "home") => {
+    if (action === "back") return toolbarState.canBack;
+    if (action === "forward") return toolbarState.canForward;
+    if (action === "up") return toolbarState.canUp;
+    return true;
+  };
+
   return (
     <main className="retro-shell">
       <section className="retro-window" aria-label="Juxton browser window">
@@ -38,7 +57,17 @@ export default function RetroWindow({
 
         <div className="window-toolbar" role="toolbar" aria-label="Navigation toolbar">
           {toolbarItems.map((item) => (
-            <button key={item} type="button" className="chrome-button toolbar-button" aria-label={item}>
+            <button
+              key={item}
+              type="button"
+              className="chrome-button toolbar-button"
+              aria-label={item}
+              onClick={() => {
+                onToolbarAction(toolbarActions[item]);
+              }}
+              disabled={!isEnabled(toolbarActions[item])}
+              aria-disabled={!isEnabled(toolbarActions[item])}
+            >
               <span className="toolbar-icon" aria-hidden="true" />
               <span>{item}</span>
             </button>
