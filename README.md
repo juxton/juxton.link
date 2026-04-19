@@ -29,6 +29,7 @@ Update this file to control:
 - `faviconEmoji`
 - `openLinksIn` (`"new-tab" | "same-tab"`)
 - `menubarLinks` (`{ label, href }[]`)
+  - Placeholder `href` values (`"#"` or empty/whitespace) are treated as non-navigating menu labels.
 
 Default config values:
 

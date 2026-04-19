@@ -4,6 +4,7 @@ export type LinkOpenMode = 'new-tab' | 'same-tab';
 
 export type SiteLink = {
   label: string;
+  // Placeholder values ('#' or empty/whitespace) are treated as non-navigating menu items.
   href: string;
 };
 
