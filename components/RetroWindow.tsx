@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 import ThemeSelector from '@/components/ThemeSelector';
-import type { LinkOpenMode, SiteLink } from '@/lib/site';
+import { siteConfig, type LinkOpenMode, type SiteLink } from '@/lib/site';
 
 type RetroWindowProps = {
   title: string;
@@ -54,7 +54,9 @@ export default function RetroWindow({
               aria-label="Window menu"
               title="Window menu"
             >
-              <span className="titlebar-leading-icon" aria-hidden="true" />
+              <span className="titlebar-leading-icon" aria-hidden="true">
+                {siteConfig.faviconEmoji}
+              </span>
             </button>
           </div>
           <h1>{title}</h1>
